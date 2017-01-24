@@ -290,6 +290,13 @@ export class Presentation extends Component {
                         </Link>
                     </Slide>
 
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Example: Netflix
+                        </Heading>
+                        <Image width="100%" src="./netflix.jpg"></Image>
+                    </Slide>
+
                 </Deck>
             </Spectacle>
         )
