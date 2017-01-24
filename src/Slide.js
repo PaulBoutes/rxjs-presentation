@@ -297,6 +297,37 @@ export class Presentation extends Component {
                         <Image width="100%" src="./netflix.jpg"></Image>
                     </Slide>
 
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Concepts
+                        </Heading>
+                        <Image width="100%" src="./concepts.png"></Image>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Pure functional 
+                        </Heading>
+                        <br/>
+                        <Text>Avoid  stateful programs, using clean input/output functions over observable streams.</Text>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Async error handling 
+                        </Heading>
+                        <br/>
+                        <Text>Traditional try/catch is powerless for errors in asynchronous computations, but ReactiveX is equipped with proper mechanisms for handling errors.</Text>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Concurrency made easy 
+                        </Heading>
+                        <br/>
+                        <Text>Observables allow to abstract away low-level threading, synchronization, and concurrency issues.</Text>
+                    </Slide>
+
                 </Deck>
             </Spectacle>
         )
