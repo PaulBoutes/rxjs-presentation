@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Spectacle, Deck, Text, Slide, Fill, Fit, Layout, Heading, Appear, Image } from 'spectacle';
+import { Spectacle, Deck, Text, Slide, Fill, Fit, Layout, Heading, Appear, Image,
+    Table, TableHeaderItem, TableItem, TableRow, Link } from 'spectacle';
 import CodeSlide from 'spectacle-code-slide';
 import createTheme from "spectacle/lib/themes/default";
 import code from './App.js'
@@ -19,10 +20,14 @@ export class Presentation extends Component {
         super();
         this.state = {
             promise: '',
-            observable: ''
+            observable: '',
+            subscription: '',
+            example1: ''
         }
         this.getFile('promise', 'promise/creation.js');
         this.getFile('observable', 'observable/creation.js');
+        this.getFile('subscription', 'observable/subscription.js');
+        this.getFile('example1', 'observable/example1.js');
     }
 
     getFile(state, url) {
@@ -49,12 +54,52 @@ export class Presentation extends Component {
                         </Heading>
                     </Slide>
 
+                    <Slide>
+                        <Table>
+                        <thead>
+                            <TableRow>
+                                <TableHeaderItem></TableHeaderItem>
+                                <TableHeaderItem>Single</TableHeaderItem>
+                                <TableHeaderItem>Multiple</TableHeaderItem>
+                            </TableRow>
+                        </thead>
+                        <tbody>
+                            <TableRow>
+                                <TableHeaderItem>Pull</TableHeaderItem>
+                                <TableItem>Function</TableItem>
+                                <TableItem>Iterator</TableItem>
+                            </TableRow>
+                            <TableRow>
+                                <TableHeaderItem>Push</TableHeaderItem>
+                                <TableItem>Promise</TableItem>
+                                <TableItem>Observable</TableItem>
+                            </TableRow>
+                        </tbody>
+                            </Table>
+                    </Slide>
+
+                    <Slide>
+                        <Text>Promises are designed to handle a single response value</Text>
+                        <br/>
+                        <Text>Observable are designed to handle an <b>infinity</b> of response values</Text>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4} caps lineHeight={1} textColor="white">
+                            We use ReactiveX
+                        </Heading>
+                        <Image width="100%" src="./use.png"></Image>
+                        <Text>Supported by Java, JavaScript, C#, Scala, Python, etc ...</Text>
+                    </Slide>
+
                     <Slide transition={[]}>
-                        <Image width="100%" src="./observable.png"></Image>
+                        <Heading size={2} caps lineHeight={1} textColor="white">
+                            Getting started
+                        </Heading>
                     </Slide>
 
                     <CodeSlide transition={['slide']} lang="js" code={this.state.promise} ranges={[
-                        { loc: [0, 31], title: 'Promise' },
+                        { loc: [0, 31], title: 'Promise / Future' },
                         { loc: [0, 1] },
                         { loc: [1, 2] },
                         { loc: [2, 3] },
@@ -71,11 +116,13 @@ export class Presentation extends Component {
                         { loc: [8, 9] }
                     ]}/>
 
-                    <Slide>
-                        <Text>Promises are designed to handle a single response value</Text>
-                        <br/>
-                        <Text>Observable are designed to handle an <b>infinity</b> of response values</Text>
-                    </Slide>
+                    <CodeSlide transition={[]} lang="js" code={this.state.subscription} ranges={[
+                        { loc: [0, 31], title: 'Subscription' },
+                        { loc: [0, 1] },
+                        { loc: [2, 4] },
+                        { loc: [4, 5] },
+                        { loc: [6, 8] }
+                    ]}/>
 
                     <Slide>
                         <Heading size={4} fit caps lineHeight={1} textColor="white">
@@ -84,22 +131,165 @@ export class Presentation extends Component {
                         <Image src="http://i.giphy.com/5K5ELLZKZfC0g.gif"></Image>
                     </Slide>
 
-                    <CodeSlide transition={['slide']} lang="js" code={code} ranges={[
-                        { loc: [ 0, 31], title: 'Reactive programming using rxJSsdfsdf' },
-                        { loc: [ 0,  1], note: 'Import the module' },
-                        { loc: [ 2,  9], note: 'Setup your presentation' },
-                        { loc: [10, 26], note: 'Time to create your first CodeSlide' },
-                        { loc: [11, 12], note: 'Props like "transition" get passed through to Slide' },
-                        { loc: [12, 13], note: 'Specify a "lang"' },
-                        { loc: [13, 14], note: 'Pass in your code as a string' },
-                        { loc: [14, 26], note: 'Now to specify some ranges. They are an array of objects' },
-                        { loc: [18, 19], note: 'Each one has a "loc" property with a start and an end.' },
-                        { loc: [16, 17], title: 'You can also add a "title"' },
-                        { loc: [20, 21], note: 'Or even a "note"' },
-                        { loc: [ 0, 31], title: 'That\'s all folks!', note: (
-                        <span>Git repo here: <a href="https://github.com/thejameskyle/spectacle-code-slide">thejameskyle/spectacle-code-slide</a></span>
-                        ) },
+                    <Slide>
+                        <Heading size={2} caps lineHeight={1} textColor="white">
+                            Operators
+                        </Heading>
+                    </Slide>
+
+                    <Slide>
+                        <Image width="100%" src="./observable.png"></Image>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#map">
+                            <Text>MAP</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#filter">
+                            <Text>FILTER</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#reduce">
+                            <Text>REDUCE</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#find">
+                            <Text>FIND</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#max">
+                            <Text>MAX</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#sum">
+                            <Text>SUM</Text>
+                        </Link>
+                    </Slide>
+
+                    <CodeSlide transition={[]} lang="js" code={this.state.example1} ranges={[
+                        { loc: [0, 31], title: 'Example' },
+                        { loc: [0, 1] },
+                        { loc: [2, 4] },
+                        { loc: [4, 5] },
+                        { loc: [6, 8] }
                     ]}/>
+
+                    <Slide>
+                        <Heading size={2} caps lineHeight={1} textColor="white">
+                            Subscribe to stream
+                        </Heading>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#delay">
+                            <Text>DELAY</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#scan">
+                            <Text>SCAN</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#debounce">
+                            <Text>DEBOUNCE</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Text>BUFFER</Text>
+                        <Image width="100%" src="./buffer.png"></Image>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={2} caps lineHeight={1} textColor="white">
+                            Combine observable
+                        </Heading>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#merge">
+                            <Text>MERGE</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#concat">
+                            <Text>CONCAT</Text>
+                        </Link>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Operator
+                        </Heading>
+                        <br/>
+                        <Link target="_blank" href="http://rxmarbles.com/#zip">
+                            <Text>ZIP</Text>
+                        </Link>
+                    </Slide>
+
                 </Deck>
             </Spectacle>
         )
