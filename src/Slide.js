@@ -336,6 +336,12 @@ export class Presentation extends Component {
 
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Example: Fetch films with Netflix
+                        </Heading>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
                             Example: Netflix
                         </Heading>
                         <Image width="95%" src="./netflix.jpg"></Image>
