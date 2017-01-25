@@ -477,6 +477,12 @@ export class Presentation extends Component {
                         { loc: [15, 16], note: 'https://jsbin.com/zidojac/edit?html,js,console,output' }
                     ]}/>
 
+                    <Slide>
+                        <Heading size={2}  caps lineHeight={1} textColor="white">
+                            TP: CHAT
+                        </Heading>
+                    </Slide>
+
 
                 </Deck>
             </Spectacle>

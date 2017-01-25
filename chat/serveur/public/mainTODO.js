@@ -6,6 +6,8 @@ const COLORS = [
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
   ];
 
+const socket = io();
+
 const $window = $(window);
 const $usernameInput = $('.usernameInput'); // Input for username
 const $messages = $('.messages'); // Messages area
@@ -14,33 +16,6 @@ const $loginPage = $('.login.page'); // The login page
 const $chatPage = $('.chat.page'); // The chatroom page
 $usernameInput.focus();
 
-const socket = io('ws://localhost:4000');
-
-const dataStreamSocket = Rx.Observable.fromEvent(socket, 'new message');
-dataStreamSocket.subscribe(data => addChatMessage(data));
-
-const loginStreamSocket = Rx.Observable.fromEvent(socket, 'login');
-loginStreamSocket.subscribe(data => {
-    connectedStream.next(true);
-    const message = "Welcome to Reactive Chat – ";
-    log(message, { prepend: true });
-    addParticipantsMessage(data);
-});
-
-const userJoinStreamSocket = Rx.Observable.fromEvent(socket, 'user joined');
-
-userJoinStreamSocket.subscribe(data => {
-    log(data.username + ' joined');
-    addParticipantsMessage(data);
-});
-
-const userLeftStreamSocket = Rx.Observable.fromEvent(socket, 'user left');
-
-userLeftStreamSocket.subscribe(data => {
-    log(data.username + ' left');
-    addParticipantsMessage(data);
-    removeChatTyping(data);
-});
 
 const inputMessageStream = Rx.Observable
     .fromEvent($inputMessage, 'keyup')
@@ -112,11 +87,39 @@ const chatStream = windowStream
 
 
 
+  socket.on('login', (data) => {
+    connectedStream.next(true);
+    const message = "Welcome to Reactive Chat – ";
+    log(message, {
+      prepend: true
+    });
+    addParticipantsMessage(data);
+  });
+
+
+  socket.on('new message', (data) => {
+    addChatMessage(data);
+  });
+
+
+  socket.on('user joined', (data) => {
+    log(data.username + ' joined');
+    addParticipantsMessage(data);
+  });
+
+
+  socket.on('user left', (data) => {
+    log(data.username + ' left');
+    addParticipantsMessage(data);
+    removeChatTyping(data);
+  });
+
+
 
 
 
 ///////////////////////////////////////////////////////////////
-
+///////////////////////////////////////////////////////////////
 
 function cleanInput (input) {
     return $('<div/>').text(input).text();
@@ -210,5 +213,3 @@ function addParticipantsMessage (data) {
       $(this).remove();
     });
   }
-
-
