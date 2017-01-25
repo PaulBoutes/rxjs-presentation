@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Spectacle, Deck, Text, Slide, Fill, Fit, Layout, Heading, Appear, Image,
+import { Spectacle, Deck, Text, Slide, Heading, Image,
     Table, TableHeaderItem, TableItem, TableRow, Link } from 'spectacle';
 import CodeSlide from 'spectacle-code-slide';
 import createTheme from "spectacle/lib/themes/default";
-import code from './App.js'
 import { loadFile } from './Util.js';
 
 
@@ -28,6 +27,7 @@ export class Presentation extends Component {
         this.getFile('observable', 'observable/creation.js');
         this.getFile('subscription', 'observable/subscription.js');
         this.getFile('example1', 'observable/example1.js');
+        require('./example/observable/example1.js');
     }
 
     getFile(state, url) {
@@ -204,9 +204,16 @@ export class Presentation extends Component {
                     <CodeSlide transition={[]} lang="js" code={this.state.example1} ranges={[
                         { loc: [0, 31], title: 'Example' },
                         { loc: [0, 1] },
-                        { loc: [2, 4] },
-                        { loc: [4, 5] },
-                        { loc: [6, 8] }
+                        { loc: [2, 14] },
+                        { loc: [15, 16] },
+                        { loc: [17, 18] },
+                        { loc: [19, 21] },
+                        { loc: [21, 22] },
+                        { loc: [22, 23] },
+                        { loc: [23, 24], note: 'Print "1 persons"' },
+                        { loc: [25, 27] },
+                        { loc: [27, 28] },
+                        { loc: [28, 29], note: 'Print "The oldest is Bob"' }
                     ]}/>
 
                     <Slide>

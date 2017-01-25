@@ -19,11 +19,11 @@ const sample = source.take(1000);
 
 sample
     .filter(person => person.age >= 30)
-    .reduce((acc, person) => acc + 1)
+    .reduce((acc, person) => acc + 1, 0)
     .map(count => `${count} persons`)
-    .subscribe(message => console.log(message))
+    .subscribe(console.log);
 
 sample
     .max(person => person.age)
-    .map(person => `The oldest person is ${person.name}`)
-    .subscribe(m => console.log(m));
+    .map(p => `The oldest is ${p.name}`)
+    .subscribe(console.log);
