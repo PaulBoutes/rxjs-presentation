@@ -22,6 +22,7 @@ export class Presentation extends Component {
             observable: '',
             subscription: '',
             example1: '',
+            example2: '',
             subject: '',
             asyncSubject: '',
             replaySubject: '',
@@ -31,6 +32,7 @@ export class Presentation extends Component {
         this.getFile('observable', 'observable/creation.js');
         this.getFile('subscription', 'observable/subscription.js');
         this.getFile('example1', 'observable/example1.js');
+        this.getFile('example2', 'observable/example2.js');
         this.getFile('subject', 'subject/subject.js');
         this.getFile('asyncSubject', 'subject/async-subject.js');
         this.getFile('replaySubject', 'subject/replay-subject.js');
@@ -306,6 +308,29 @@ export class Presentation extends Component {
                             <Text>ZIP</Text>
                         </Link>
                     </Slide>
+
+                    <CodeSlide transition={[]} lang="js" code={this.state.example2} ranges={[
+                        { loc: [0, 40], title: 'Example' },
+                        { loc: [0, 1] },
+                        { loc: [2, 6] },
+                        { loc: [7, 8] },
+                        { loc: [8, 9] },
+                        { loc: [9, 10] },
+                        { loc: [11, 12] },
+                        { loc: [12, 13] },
+                        { loc: [13, 14] },
+                        { loc: [15, 17] },
+                        { loc: [17, 18] },
+                        { loc: [19, 21] },
+                        { loc: [22, 27] },
+                        { loc: [28, 29] },
+                        { loc: [30, 32] },
+                        { loc: [32, 33] },
+                        { loc: [33, 34] },
+                        { loc: [34, 35] },
+                        { loc: [36, 37] },
+                        { loc: [36, 37], note: 'https://jsbin.com/dutera/edit?html,js,console,output' }
+                    ]}/>
 
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">

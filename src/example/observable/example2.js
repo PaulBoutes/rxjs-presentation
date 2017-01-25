@@ -1,27 +1,37 @@
 import * as Rx from 'rxjs/Rx'
 
-const button = document.querySelector('#button');
-const clickStream = Rx.Observable.fromEvent(button, 'click');
+const b = document.querySelector('#send');
+const b2 = document.querySelector('#unsub');
+const s = Rx.Observable.fromEvent(b,'click');
+const u = Rx.Observable.fromEvent(b2,'click');
 
-clickStream.subscribe(p => console.log(p.x));
+s.map(m => [m.clientX, m.clientY])
+ .map(p => `Position: ${p}`)
+ .subscribe(console.log);
 
-clickStream
-    .scan((acc, _) => acc + 1)
-    .subscribe(total => console.log(total));
+s.scan((acc, _) => acc + 1, 0)
+ .map(c => `Count: ${c}`)
+ .subscribe(console.log);
 
-const everyHours = personStream
-    .buffer(Rx.Observable.interval(3600));
+const personStream = Rx.Observable
+      .interval(700)
+      .map(i => ({age: i, name: `Bob ${i}`}));
 
-const total = everyHours.map(persons => {
-    persons
+const everySeconds = personStream
+      .buffer(Rx.Observable.interval(1000));
+
+const total = everySeconds
+    .map(p => p
         .map(a => a.age)
-        .reduce((a, b) => a + b)
-});
+        .reduce((a, b) => a + b, 0)
+        );
 
-const size = everyHours.map(persons => persons.length);
+const size = everySeconds.map(p => p.length);
 
-const zipped = Rx.Observable.zip(
-    total,
-    size
-).map((total, size) => total / size)
- .subscribe(average => console.log(average));
+const zipped = Rx.Observable
+ .zip(total, size)
+ .map(([total, size]) => total / size)
+ .map(average => `Average: ${average}`)
+ .subscribe(console.log);
+
+u.subscribe(_ => zipped.unsubscribe());
