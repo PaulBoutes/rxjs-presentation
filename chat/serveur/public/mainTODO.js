@@ -6,8 +6,6 @@ const COLORS = [
     '#3b88eb', '#3824aa', '#a700ff', '#d300e7'
   ];
 
-const socket = io();
-
 const $window = $(window);
 const $usernameInput = $('.usernameInput'); // Input for username
 const $messages = $('.messages'); // Messages area
@@ -16,110 +14,54 @@ const $loginPage = $('.login.page'); // The login page
 const $chatPage = $('.chat.page'); // The chatroom page
 $usernameInput.focus();
 
+const socket = io('ws://localhost:4000');
 
-const inputMessageStream = Rx.Observable
-    .fromEvent($inputMessage, 'keyup')
-    .map(e => e.target.value);
+//Subscribe to socket event
 
-
-
-const usernameInputStream = Rx.Observable
-    .fromEvent($usernameInput, 'keyup')
-    .map(e => e.target.value)
-    .filter(name => name.length > 2);
+// const dataStreamSocket = ???
+// const loginStreamSocket = ???
+// const userJoinStreamSocket = ???
+// const userLeftStreamSocket = ???
 
 
-const usernameStream = new Rx.BehaviorSubject(null);
-const messageStream = new Rx.Subject();
-const connectedStream = new Rx.BehaviorSubject(false);
+//Handle message when typings text
+
+// const inputMessageStream = ???
 
 
-usernameStream.subscribe(name => {
-    if (name) {
-        $loginPage.fadeOut();
-        $chatPage.show();
-        $loginPage.off('click');
-        $currentInput = $inputMessage.focus();
-        socket.emit('add user', name);
-    }
-});
+//Handle name when typings username
 
-messageStream.subscribe(([username, message]) => {
-    message = cleanInput(message);
-    $inputMessage.val('');
-    addChatMessage({
-        username: username,
-        message: message
-    });
-    socket.emit('new message', message);
-});
+// const usernameInputStream = ???
 
 
-const combined = Rx.Observable
-    .combineLatest(
-        usernameInputStream,
-        usernameStream.asObservable()
-    );
+// A clue
 
-const combinedChat = Rx.Observable
-    .combineLatest(
-        usernameStream.asObservable(),
-        inputMessageStream,
-        connectedStream
-    )
-
-const windowStream = Rx.Observable
-    .fromEvent($window, 'keydown')
-    .map(e => e.which)
-    .filter(event => event === 13);
-
-
-const loginStream = windowStream
-    .withLatestFrom(combined)
-    .filter(([code, [current, name]]) => name === null)
-    .subscribe(([code, [current, name]]) => usernameStream.next(current));
-
-
-const chatStream = windowStream
-    .withLatestFrom(combinedChat)
-    .filter(([code, [name, m, connected]]) => name !== null && connected && m.length > 0)
-    .subscribe(([code, [name, message]]) => messageStream.next([name, message]));
+// const usernameStream = ???
+// const messageStream = ???
+// const connectedStream = ???
 
 
 
-  socket.on('login', (data) => {
-    connectedStream.next(true);
-    const message = "Welcome to Reactive Chat – ";
-    log(message, {
-      prepend: true
-    });
-    addParticipantsMessage(data);
-  });
 
+//Handle event on window object (enter key)
 
-  socket.on('new message', (data) => {
-    addChatMessage(data);
-  });
+// const windowStream = ???
 
+//Handle event on login
 
-  socket.on('user joined', (data) => {
-    log(data.username + ' joined');
-    addParticipantsMessage(data);
-  });
+// const loginStream = ???
 
+//Handle for chat
 
-  socket.on('user left', (data) => {
-    log(data.username + ' left');
-    addParticipantsMessage(data);
-    removeChatTyping(data);
-  });
+// const chatStream = ???
+
 
 
 
 
 
 ///////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////
+
 
 function cleanInput (input) {
     return $('<div/>').text(input).text();
@@ -213,3 +155,4 @@ function addParticipantsMessage (data) {
       $(this).remove();
     });
   }
+
