@@ -22,12 +22,20 @@ export class Presentation extends Component {
             promise: '',
             observable: '',
             subscription: '',
-            example1: ''
+            example1: '',
+            subject: '',
+            asyncSubject: '',
+            replaySubject: '',
+            behaviorSubject: ''
         }
         this.getFile('promise', 'promise/creation.js');
         this.getFile('observable', 'observable/creation.js');
         this.getFile('subscription', 'observable/subscription.js');
         this.getFile('example1', 'observable/example1.js');
+        this.getFile('subject', 'subject/subject.js');
+        this.getFile('asyncSubject', 'subject/async-subject.js');
+        this.getFile('replaySubject', 'subject/replay-subject.js');
+        this.getFile('behaviorSubject', 'subject/behavior-subject.js');
     }
 
     getFile(state, url) {
@@ -336,6 +344,14 @@ export class Presentation extends Component {
                         <Text>A Subject is a bridge that acts both as an observer and as an Observable</Text>
                     </Slide>
 
+                    <CodeSlide transition={[]} lang="js" code={this.state.subject} ranges={[
+                        { loc: [0, 31], title: 'Example' },
+                        { loc: [0, 1] },
+                        { loc: [2, 4] },
+                        { loc: [4, 5] },
+                        { loc: [6, 8] }
+                    ]}/>
+
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Async Subject 
@@ -343,6 +359,15 @@ export class Presentation extends Component {
                         <br/>
                         <Text>The AsyncSubject is a variant where only the last value of the Observable execution is sent to its observers, and only when the execution completes</Text>
                     </Slide>
+
+                     <CodeSlide transition={[]} lang="js" code={this.state.asyncSubject} ranges={[
+                        { loc: [0, 31], title: 'Example' },
+                        { loc: [0, 1] },
+                        { loc: [2, 4] },
+                        { loc: [4, 5] },
+                        { loc: [6, 8] }
+                    ]}/>
+
 
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
@@ -352,6 +377,15 @@ export class Presentation extends Component {
                         <Text>A ReplaySubject records multiple values from the Observable execution and replays them to new subscribers.</Text>
                     </Slide>
 
+                     <CodeSlide transition={[]} lang="js" code={this.state.replaySubject} ranges={[
+                        { loc: [0, 31], title: 'Example' },
+                        { loc: [0, 1] },
+                        { loc: [2, 4] },
+                        { loc: [4, 5] },
+                        { loc: [6, 8] }
+                    ]}/>
+
+
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Behavior Subject 
@@ -360,6 +394,14 @@ export class Presentation extends Component {
                         <Text>Whenever a new Observer subscribes, it will immediately receive the "current value" from the BehaviorSubject.</Text>
                         <Text>BehaviorSubjects are useful for representing "values over time". For instance, an event stream of birthdays is a Subject, but the stream of a person's age would be a BehaviorSubject.</Text>
                     </Slide>
+
+                     <CodeSlide transition={[]} lang="js" code={this.state.behaviorSubject} ranges={[
+                        { loc: [0, 31], title: 'Example' },
+                        { loc: [0, 1] },
+                        { loc: [2, 4] },
+                        { loc: [4, 5] },
+                        { loc: [6, 8] }
+                    ]}/>
 
 
                 </Deck>
