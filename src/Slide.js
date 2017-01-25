@@ -328,6 +328,40 @@ export class Presentation extends Component {
                         <Text>Observables allow to abstract away low-level threading, synchronization, and concurrency issues.</Text>
                     </Slide>
 
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Subjects 
+                        </Heading>
+                        <br/>
+                        <Text>A Subject is a bridge that acts both as an observer and as an Observable</Text>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Async Subject 
+                        </Heading>
+                        <br/>
+                        <Text>The AsyncSubject is a variant where only the last value of the Observable execution is sent to its observers, and only when the execution completes</Text>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Replay Subject 
+                        </Heading>
+                        <br/>
+                        <Text>A ReplaySubject records multiple values from the Observable execution and replays them to new subscribers.</Text>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Behavior Subject 
+                        </Heading>
+                        <br/>
+                        <Text>Whenever a new Observer subscribes, it will immediately receive the "current value" from the BehaviorSubject.</Text>
+                        <Text>BehaviorSubjects are useful for representing "values over time". For instance, an event stream of birthdays is a Subject, but the stream of a person's age would be a BehaviorSubject.</Text>
+                    </Slide>
+
+
                 </Deck>
             </Spectacle>
         )
