@@ -1,12 +1,13 @@
 import * as Rx from 'rxjs/Rx'
 
-var subject = new Rx.Subject();
+const subject = new Rx.Subject();
 
 subject.subscribe({
-  next: (v) => console.log('observerA: ' + v)
+  next: (v) => console.log(`observerA: ${v}`)
 });
+
 subject.subscribe({
-  next: (v) => console.log('observerB: ' + v)
+  next: (v) => console.log(`observerB: ${v}`)
 });
 
 subject.next(1);

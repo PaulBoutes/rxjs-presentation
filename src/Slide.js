@@ -408,8 +408,10 @@ export class Presentation extends Component {
                         { loc: [0, 31], title: 'Example' },
                         { loc: [0, 1] },
                         { loc: [2, 4] },
-                        { loc: [4, 5] },
-                        { loc: [6, 8] }
+                        { loc: [4, 7] },
+                        { loc: [8, 11] },
+                        { loc: [12, 14] },
+                        { loc: [12, 14], note: 'https://jsbin.com/poreme/edit?html,js,console,output' }
                     ]}/>
 
                     <Slide>
@@ -424,8 +426,12 @@ export class Presentation extends Component {
                         { loc: [0, 31], title: 'Example' },
                         { loc: [0, 1] },
                         { loc: [2, 4] },
-                        { loc: [4, 5] },
-                        { loc: [6, 8] }
+                        { loc: [4, 7] },
+                        { loc: [8, 12] },
+                        { loc: [13, 16] },
+                        { loc: [17, 18] },
+                        { loc: [18, 19] },
+                        { loc: [18, 19], note: 'https://jsbin.com/liqaqiq/edit?html,js,console,output' }
                     ]}/>
 
 
@@ -440,9 +446,12 @@ export class Presentation extends Component {
                      <CodeSlide transition={[]} lang="js" code={this.state.replaySubject} ranges={[
                         { loc: [0, 31], title: 'Example' },
                         { loc: [0, 1] },
-                        { loc: [2, 4] },
-                        { loc: [4, 5] },
-                        { loc: [6, 8] }
+                        { loc: [2, 3], note: 'buffer 3 values for new subscribers' },
+                        { loc: [4, 7] },
+                        { loc: [8, 12] },
+                        { loc: [13, 16] },
+                        { loc: [17, 18] },
+                        { loc: [17, 18], note: 'https://jsbin.com/wowepa/edit?html,js,console,output' }
                     ]}/>
 
 
@@ -458,9 +467,12 @@ export class Presentation extends Component {
                      <CodeSlide transition={[]} lang="js" code={this.state.behaviorSubject} ranges={[
                         { loc: [0, 31], title: 'Example' },
                         { loc: [0, 1] },
-                        { loc: [2, 4] },
-                        { loc: [4, 5] },
-                        { loc: [6, 8] }
+                        { loc: [2, 3], note: '0 is the initial value' },
+                        { loc: [4, 7] },
+                        { loc: [8, 10] },
+                        { loc: [11, 14] }, 
+                        { loc: [15, 16] },
+                        { loc: [15, 16], note: 'https://jsbin.com/zidojac/edit?html,js,console,output' }
                     ]}/>
 
 

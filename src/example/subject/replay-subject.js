@@ -1,9 +1,9 @@
 import * as Rx from 'rxjs/Rx'
 
-var subject = new Rx.ReplaySubject(3); // buffer 3 values for new subscribers
+const subject = new Rx.ReplaySubject(3);
 
 subject.subscribe({
-  next: (v) => console.log('observerA: ' + v)
+  next: (v) => console.log(`observerA: ${v}`)
 });
 
 subject.next(1);
@@ -12,7 +12,7 @@ subject.next(3);
 subject.next(4);
 
 subject.subscribe({
-  next: (v) => console.log('observerB: ' + v)
+  next: (v) => console.log(`observerB: ${v}`)
 });
 
 subject.next(5);

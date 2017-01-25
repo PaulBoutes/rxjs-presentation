@@ -1,16 +1,16 @@
 import * as Rx from 'rxjs/Rx'
 
-var subject = new Rx.BehaviorSubject(0); // 0 is the initial value
+const subject = new Rx.BehaviorSubject(0);
 
 subject.subscribe({
-  next: (v) => console.log('observerA: ' + v)
+  next: (v) => console.log(`observerA: ${v}`)
 });
 
 subject.next(1);
 subject.next(2);
 
 subject.subscribe({
-  next: (v) => console.log('observerB: ' + v)
+  next: (v) => console.log(`observerB: ${v}`)
 });
 
 subject.next(3);
