@@ -232,6 +232,8 @@ export class Presentation extends Component {
                         <Heading size={2} caps lineHeight={1} textColor="white">
                             Subscribe to stream
                         </Heading>
+                        <br/>
+                        <Image width="50%" src="./stream.jpg"></Image>
                     </Slide>
 
                     <Slide>
