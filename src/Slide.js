@@ -241,8 +241,8 @@ export class Presentation extends Component {
                             Operator
                         </Heading>
                         <br/>
-                        <Link target="_blank" href="http://rxmarbles.com/#delay">
-                            <Text>DELAY</Text>
+                        <Link target="_blank" href="http://rxmarbles.com/#scan">
+                            <Text>SCAN</Text>
                         </Link>
                     </Slide>
 
@@ -251,8 +251,8 @@ export class Presentation extends Component {
                             Operator
                         </Heading>
                         <br/>
-                        <Link target="_blank" href="http://rxmarbles.com/#scan">
-                            <Text>SCAN</Text>
+                        <Link target="_blank" href="http://rxmarbles.com/#delay">
+                            <Text>DELAY</Text>
                         </Link>
                     </Slide>
 
@@ -336,6 +336,12 @@ export class Presentation extends Component {
 
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Example: Fetch films with Netflix
+                        </Heading>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
                             Example: Netflix
                         </Heading>
                         <Image width="95%" src="./netflix.jpg"></Image>
@@ -351,7 +357,9 @@ export class Presentation extends Component {
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Pure functional 
                         </Heading>
-                        <Image width="60%" src="./pure_f.jpg"></Image>
+                        {
+                        //<Image width="60%" src="./pure_f.jpg"></Image>
+                        }
                         <br/>
                         <Text>Avoid  stateful programs, using clean input/output functions over observable streams.</Text>
                     </Slide>
@@ -377,11 +385,11 @@ export class Presentation extends Component {
                         { loc: [0, 30], title: 'Example' },
                         { loc: [0, 1] },
                         { loc: [2, 3] },
-                        { loc: [4, 10] },
-                        { loc: [11, 13] },
-                        { loc: [13, 14] },
-                        { loc: [15, 19] },
-                        { loc: [15, 19], note: 'https://jsbin.com/yosudok/edit?html,js,console,output' }
+                        { loc: [4, 9] },
+                        { loc: [10, 12] },
+                        { loc: [12, 13] },
+                        { loc: [14, 18] },
+                        { loc: [14, 18], note: 'https://jsbin.com/yosudok/edit?html,js,console,output' }
                     ]}/>
 
                     <Slide>

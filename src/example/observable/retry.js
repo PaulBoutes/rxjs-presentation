@@ -3,10 +3,9 @@ import * as Rx from 'rxjs/Rx';
 const source = Rx.Observable.interval(1000);
 
 const predicate = (val) => {
-    let ob$ = null;
-    return val > 3
-    ? ob$ = Rx.Observable.throw('Error')
-    : ob$ = Rx.Observable.of(val);
+    return val >= 3
+    ? Rx.Observable.throw('Error')
+    : Rx.Observable.of(val);
 } 
 
 const test = source
