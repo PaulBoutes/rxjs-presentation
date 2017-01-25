@@ -26,7 +26,8 @@ export class Presentation extends Component {
             subject: '',
             asyncSubject: '',
             replaySubject: '',
-            behaviorSubject: ''
+            behaviorSubject: '',
+            retry: ''
         }
         this.getFile('promise', 'promise/creation.js');
         this.getFile('observable', 'observable/creation.js');
@@ -37,8 +38,7 @@ export class Presentation extends Component {
         this.getFile('asyncSubject', 'subject/async-subject.js');
         this.getFile('replaySubject', 'subject/replay-subject.js');
         this.getFile('behaviorSubject', 'subject/behavior-subject.js');
-
-        require('./example/observable/example1.js');
+        this.getFile('retry', 'observable/retry.js');
 
     }
 
@@ -336,12 +336,12 @@ export class Presentation extends Component {
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Example: Netflix
                         </Heading>
-                        <Image width="100%" src="./netflix.jpg"></Image>
+                        <Image width="95%" src="./netflix.jpg"></Image>
                     </Slide>
 
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
-                            Concepts
+                            Some concepts
                         </Heading>
                     </Slide>
 
@@ -349,6 +349,7 @@ export class Presentation extends Component {
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Pure functional 
                         </Heading>
+                        <Image width="60%" src="./pure_f.jpg"></Image>
                         <br/>
                         <Text>Avoid  stateful programs, using clean input/output functions over observable streams.</Text>
                     </Slide>
@@ -369,6 +370,17 @@ export class Presentation extends Component {
                         <Text>Traditional try/catch is powerless for errors in asynchronous computations, but ReactiveX is equipped with proper mechanisms for handling errors.</Text>
                          <Image width="100%" src="./retry.png"></Image>
                     </Slide>
+
+                    <CodeSlide transition={[]} lang="js" code={this.state.retry} ranges={[
+                        { loc: [0, 30], title: 'Example' },
+                        { loc: [0, 1] },
+                        { loc: [2, 3] },
+                        { loc: [4, 10] },
+                        { loc: [11, 13] },
+                        { loc: [13, 14] },
+                        { loc: [15, 19] },
+                        { loc: [15, 19], note: 'https://jsbin.com/yosudok/edit?html,js,console,output' }
+                    ]}/>
 
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
