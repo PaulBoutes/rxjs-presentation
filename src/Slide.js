@@ -318,7 +318,6 @@ export class Presentation extends Component {
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Concepts
                         </Heading>
-                        <Image width="100%" src="./concepts.png"></Image>
                     </Slide>
 
                     <Slide>
@@ -331,10 +330,19 @@ export class Presentation extends Component {
 
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Laziness 
+                        </Heading>
+                        <br/>
+                        <Text>Only calls to "subscribe" trigger the evaluation (like action on Spark)</Text>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
                             Async error handling 
                         </Heading>
                         <br/>
                         <Text>Traditional try/catch is powerless for errors in asynchronous computations, but ReactiveX is equipped with proper mechanisms for handling errors.</Text>
+                         <Image width="100%" src="./retry.png"></Image>
                     </Slide>
 
                     <Slide>
@@ -348,6 +356,12 @@ export class Presentation extends Component {
                     <Slide>
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Subjects 
+                        </Heading>
+                    </Slide>
+
+                    <Slide>
+                        <Heading size={4}  caps lineHeight={1} textColor="white">
+                            Simple Subject 
                         </Heading>
                         <br/>
                         <Text>A Subject is a bridge that acts both as an observer and as an Observable</Text>
