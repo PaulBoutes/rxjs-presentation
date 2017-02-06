@@ -14,13 +14,16 @@ const $loginPage = $('.login.page'); // The login page
 const $chatPage = $('.chat.page'); // The chatroom page
 $usernameInput.focus();
 
-const socket = io('ws://172.17.6.128:1080');
 
-//Subscribe to socket event
+
+
+const host = 'localhost';
+const port = 1080;
+
+const socket = io(`ws://${host}:${port}`);
 
 const dataStreamSocket = Rx.Observable.fromEvent(socket, 'new message');
 dataStreamSocket.subscribe(data => addChatMessage(data));
-
 
 const loginStreamSocket = Rx.Observable.fromEvent(socket, 'login');
 loginStreamSocket.subscribe(data => {
@@ -30,19 +33,26 @@ loginStreamSocket.subscribe(data => {
     addParticipantsMessage(data);
 });
 
+const userJoinStreamSocket = Rx.Observable.fromEvent(socket, 'user joined');
 
-// const userJoinStreamSocket = ???
-// const userLeftStreamSocket = ???
+userJoinStreamSocket.subscribe(data => {
+    log(data.username + ' joined');
+    addParticipantsMessage(data);
+});
 
+const userLeftStreamSocket = Rx.Observable.fromEvent(socket, 'user left');
 
-//Handle message when typings text
+userLeftStreamSocket.subscribe(data => {
+    log(data.username + ' left');
+    addParticipantsMessage(data);
+    removeChatTyping(data);
+});
 
 const inputMessageStream = Rx.Observable
     .fromEvent($inputMessage, 'keyup')
     .map(e => e.target.value);
 
 
-//Handle name when typings username
 
 const usernameInputStream = Rx.Observable
     .fromEvent($usernameInput, 'keyup')
@@ -50,22 +60,20 @@ const usernameInputStream = Rx.Observable
     .filter(name => name.length > 2);
 
 
-
-// A clue
-
 const usernameStream = new Rx.BehaviorSubject(null);
 const messageStream = new Rx.Subject();
 const connectedStream = new Rx.BehaviorSubject(false);
 
+
 usernameStream
-    .filter(name => name !== null)
-    .subscribe(name => {
-        $loginPage.fadeOut();
-        $chatPage.show();
-        $loginPage.off('click');
-        $currentInput = $inputMessage.focus();
-        socket.emit('add user', name);
-    });
+.filter(name => name !== null)
+.subscribe(name => {
+    $loginPage.fadeOut();
+    $chatPage.show();
+    $loginPage.off('click');
+    $currentInput = $inputMessage.focus();
+    socket.emit('add user', name);
+});
 
 messageStream.subscribe(([username, message]) => {
     message = cleanInput(message);
@@ -91,25 +99,17 @@ const combinedChat = Rx.Observable
         connectedStream
     )
 
-
-
-//Handle event on window object (enter key)
-
 const windowStream = Rx.Observable
     .fromEvent($window, 'keydown')
     .map(e => e.which)
     .filter(event => event === 13);
 
-windowStream.subscribe(console.log);
-
-//Handle event on login
 
 const loginStream = windowStream
     .withLatestFrom(combined)
-    .filter( ([code, [ current, name ]]) => name === null )
-    .subscribe( ([code, [current, name]]) => usernameStream.next(current) );
+    .filter(([code, [current, name]]) => name === null)
+    .subscribe(([code, [current, name]]) => usernameStream.next(current));
 
-//Handle for chat
 
 const chatStream = windowStream
     .withLatestFrom(combinedChat)
@@ -121,6 +121,8 @@ const chatStream = windowStream
 
 
 
+///////////////////////////////////////////////////////////////
+//DIRECTLY PROVIDED BY SOCKET.IO EXAMPLE//
 ///////////////////////////////////////////////////////////////
 
 
@@ -216,4 +218,5 @@ function addParticipantsMessage (data) {
       $(this).remove();
     });
   }
+
 
