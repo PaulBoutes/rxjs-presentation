@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Spectacle, Deck, Text, Slide, Heading, Image,
     Table, TableHeaderItem, TableItem, TableRow, Link, CodePane } from 'spectacle';
-import CodeSlide from 'spectacle-code-slide';
 import createTheme from "spectacle/lib/themes/default";
 import { loadFile } from './Util.js';
 
@@ -18,17 +17,21 @@ export class Presentation extends Component {
     constructor() {
         super();
         this.state = {
-            promise: '',
-            observable: '',
-            subscription: '',
-            example1: '',
-            example2: '',
-            subject: '',
-            asyncSubject: '',
-            replaySubject: '',
-            behaviorSubject: '',
-            retry: ''
+            promise: '<code>',
+            observable: '<code>',
+            subscription: '<code>',
+            example1: '<code>',
+            example2: '<code>',
+            subject: '<code>',
+            asyncSubject: '<code>',
+            replaySubject: '<code>',
+            behaviorSubject: '<code>',
+            retry: '<code>'
         }
+
+    }
+
+    componentDidMount() {
         this.getFile('promise', 'promise/creation.js');
         this.getFile('observable', 'observable/creation.js');
         this.getFile('subscription', 'observable/subscription.js');
@@ -39,7 +42,6 @@ export class Presentation extends Component {
         this.getFile('replaySubject', 'subject/replay-subject.js');
         this.getFile('behaviorSubject', 'subject/behavior-subject.js');
         this.getFile('retry', 'observable/retry.js');
-
     }
 
     getFile(state, url) {
@@ -104,11 +106,12 @@ export class Presentation extends Component {
                         <Text>Supported by Java, JavaScript, C#, Scala, Python, etc ...</Text>
                     </Slide>
 
-                    <Slide transition={[]}>
+                    <Slide>
                         <Heading size={2} caps lineHeight={1} textColor="white">
                             Getting started
                         </Heading>
                     </Slide>
+                    
 
                     <Slide transition={[]}>
                         <Heading size={4} caps lineHeight={1} textColor="white">
@@ -116,6 +119,7 @@ export class Presentation extends Component {
                         </Heading>
                         <CodePane lang="js" source={this.state.promise}/>
                     </Slide>
+                    
 
                     <Slide transition={[]}>
                         <Heading size={4} caps lineHeight={1} textColor="white">
@@ -130,6 +134,7 @@ export class Presentation extends Component {
                         </Heading>
                         <CodePane lang="js" source={this.state.subscription}/>
                     </Slide>
+                    
 
                     <Slide>
                         <Heading size={4} fit caps lineHeight={1} textColor="white">
@@ -312,7 +317,7 @@ export class Presentation extends Component {
                         <Heading size={4}  caps lineHeight={1} textColor="white">
                             Example: Netflix
                         </Heading>
-                        <Image width="95%" src="./netflix.jpg"></Image>
+                        <Image width="90%" src="./netflix.jpg"></Image>
                     </Slide>
 
                     <Slide>
@@ -432,7 +437,6 @@ export class Presentation extends Component {
                         </Heading>
                         <CodePane lang="js" source={this.state.behaviorSubject}/>
                     </Slide>
-
 
                     <Slide>
                         <Heading size={2}  caps lineHeight={1} textColor="white">
