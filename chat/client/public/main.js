@@ -16,8 +16,11 @@ $usernameInput.focus();
 
 const socket = io('ws://172.17.6.128:1080');
 
+//Subscribe to socket event
+
 const dataStreamSocket = Rx.Observable.fromEvent(socket, 'new message');
 dataStreamSocket.subscribe(data => addChatMessage(data));
+
 
 const loginStreamSocket = Rx.Observable.fromEvent(socket, 'login');
 loginStreamSocket.subscribe(data => {
@@ -27,26 +30,19 @@ loginStreamSocket.subscribe(data => {
     addParticipantsMessage(data);
 });
 
-const userJoinStreamSocket = Rx.Observable.fromEvent(socket, 'user joined');
 
-userJoinStreamSocket.subscribe(data => {
-    log(data.username + ' joined');
-    addParticipantsMessage(data);
-});
+// const userJoinStreamSocket = ???
+// const userLeftStreamSocket = ???
 
-const userLeftStreamSocket = Rx.Observable.fromEvent(socket, 'user left');
 
-userLeftStreamSocket.subscribe(data => {
-    log(data.username + ' left');
-    addParticipantsMessage(data);
-    removeChatTyping(data);
-});
+//Handle message when typings text
 
 const inputMessageStream = Rx.Observable
     .fromEvent($inputMessage, 'keyup')
     .map(e => e.target.value);
 
 
+//Handle name when typings username
 
 const usernameInputStream = Rx.Observable
     .fromEvent($usernameInput, 'keyup')
@@ -54,20 +50,22 @@ const usernameInputStream = Rx.Observable
     .filter(name => name.length > 2);
 
 
+
+// A clue
+
 const usernameStream = new Rx.BehaviorSubject(null);
 const messageStream = new Rx.Subject();
 const connectedStream = new Rx.BehaviorSubject(false);
 
-
-usernameStream.subscribe(name => {
-    if (name) {
+usernameStream
+    .filter(name => name !== null)
+    .subscribe(name => {
         $loginPage.fadeOut();
         $chatPage.show();
         $loginPage.off('click');
         $currentInput = $inputMessage.focus();
         socket.emit('add user', name);
-    }
-});
+    });
 
 messageStream.subscribe(([username, message]) => {
     message = cleanInput(message);
@@ -93,22 +91,32 @@ const combinedChat = Rx.Observable
         connectedStream
     )
 
+
+
+//Handle event on window object (enter key)
+
 const windowStream = Rx.Observable
     .fromEvent($window, 'keydown')
     .map(e => e.which)
     .filter(event => event === 13);
 
+windowStream.subscribe(console.log);
+
+//Handle event on login
 
 const loginStream = windowStream
     .withLatestFrom(combined)
-    .filter(([code, [current, name]]) => name === null)
-    .subscribe(([code, [current, name]]) => usernameStream.next(current));
+    .filter( ([code, [ current, name ]]) => name === null )
+    .subscribe( ([code, [current, name]]) => usernameStream.next(current) );
 
+//Handle for chat
 
 const chatStream = windowStream
     .withLatestFrom(combinedChat)
     .filter(([code, [name, m, connected]]) => name !== null && connected && m.length > 0)
     .subscribe(([code, [name, message]]) => messageStream.next([name, message]));
+
+
 
 
 
@@ -208,5 +216,4 @@ function addParticipantsMessage (data) {
       $(this).remove();
     });
   }
-
 

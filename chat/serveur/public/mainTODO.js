@@ -14,7 +14,7 @@ const $loginPage = $('.login.page'); // The login page
 const $chatPage = $('.chat.page'); // The chatroom page
 $usernameInput.focus();
 
-const socket = io('ws://localhost:4000');
+const socket = io('ws://172.17.6.128:1080');
 
 //Subscribe to socket event
 

@@ -3,14 +3,16 @@ const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 1080;
 
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
+
+app.get('/', (res, req) => req.send('Connected'));
 
 
 let numUsers = 0;

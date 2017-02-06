@@ -14,7 +14,13 @@ const $loginPage = $('.login.page'); // The login page
 const $chatPage = $('.chat.page'); // The chatroom page
 $usernameInput.focus();
 
-const socket = io('ws://172.17.6.128:1080');
+
+
+
+const host = 'localhost';
+const port = 1080;
+
+const socket = io(`ws://${host}:${port}`);
 
 const dataStreamSocket = Rx.Observable.fromEvent(socket, 'new message');
 dataStreamSocket.subscribe(data => addChatMessage(data));
@@ -59,14 +65,14 @@ const messageStream = new Rx.Subject();
 const connectedStream = new Rx.BehaviorSubject(false);
 
 
-usernameStream.subscribe(name => {
-    if (name) {
-        $loginPage.fadeOut();
-        $chatPage.show();
-        $loginPage.off('click');
-        $currentInput = $inputMessage.focus();
-        socket.emit('add user', name);
-    }
+usernameStream
+.filter(name => name !== null)
+.subscribe(name => {
+    $loginPage.fadeOut();
+    $chatPage.show();
+    $loginPage.off('click');
+    $currentInput = $inputMessage.focus();
+    socket.emit('add user', name);
 });
 
 messageStream.subscribe(([username, message]) => {
@@ -113,6 +119,10 @@ const chatStream = windowStream
 
 
 
+
+
+///////////////////////////////////////////////////////////////
+//DIRECTLY PROVIDED BY SOCKET.IO EXAMPLE//
 ///////////////////////////////////////////////////////////////
 
 
