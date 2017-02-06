@@ -9,6 +9,9 @@ server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
+
+//app.use(express.static(__dirname + '/public'));
+
 app.get('/', (res, req) => req.send('Connected'));
 
 
