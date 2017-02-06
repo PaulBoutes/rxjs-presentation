@@ -1,3 +1,4 @@
-# RXJS-Presentation
+# Presentation about Rxjs
 
-TODO
+## authors: Boutes Paul & Cassan Damien
+
